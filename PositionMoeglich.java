@@ -43,7 +43,7 @@ public class PositionMoeglich{
         int zeile = scan.nextInt();
         System.out.println("Spalte: ");
         int spalte = scan.nextInt();
-        System.out.println("Die gewaehlte Position lautet: array["+ zeile + "][" + spalte + "]");
+        System.out.println("Die gewaehlte Position lautet: array[" + zeile + "][" + spalte + "]");
 
         if (array[zeile][spalte] == 1) {
             System.out.println("Die gewuenschte Position ist besetzbar.");
