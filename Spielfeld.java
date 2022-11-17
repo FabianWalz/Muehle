@@ -1,9 +1,11 @@
-public class Main {
+
+public class Spielfeld {
     public static void main(String[] args) {
 
         int[][] array = new int[7][7];
 
         array[0][0] = 1;
+
         array[0][3] = 1;
         array[0][6] = 1;
 
@@ -40,5 +42,7 @@ public class Main {
             }
             System.out.println();
         }
+   
     }
+  
 }
