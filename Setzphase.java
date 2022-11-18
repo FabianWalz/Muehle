@@ -14,38 +14,42 @@ public class SetzphaseMuehle {
             System.out.println("Setze deinen " + anzahlSteineSpieler1 + ". Stein");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Zeile:");
-            int zeile = scanner.nextInt();
+            int zeile1 = scanner.nextInt();
             System.out.println("Spalte:");
-            int spalte = scanner.nextInt();
-            if (array[zeile][spalte] == 1) {
-                array[zeile][spalte] = 2;
+            int spalte1 = scanner.nextInt();
+            System.out.println("Gewaehlte Position:" + array[zeile1][spalte1]);
+            if (array[zeile1][spalte1] == 1) {
+                array[zeile1][spalte1] = 2;
                 anzahlSteineSpieler1 += 1;
-            } else if ((array[zeile][spalte] == 0) || (array[zeile][spalte] == 3)) {
+            } else if ((array[zeile1][spalte1] == 0) || (array[zeile1][spalte1] == 3)) {
                 System.out.println("Bitte ein freies Feld waehlen.");
-                int zeile = scanner.nextInt();
+                int zeile1New = scanner.nextInt();
                 System.out.println("Spalte:");
-                int spalte = scanner.nextInt();
+                int spalte1New = scanner.nextInt();
+                System.out.println("Neue gewaehlte Position:" + array[zeile1New][spalte1New]);
                 anzahlSteineSpieler1 += 1;
             }
 
             System.out.println(spieler2 + ", du bist an der Reihe.");
             System.out.println("Setze deinen " + anzahlSteineSpieler2 + ". Stein");
             System.out.println("Zeile:");
-            int zeile = scanner.nextInt();
+            int zeile2 = scanner.nextInt();
             System.out.println("Spalte:");
-            int spalte = scanner.nextInt();
-            if (array[zeile][spalte] == 1) {
-                array[zeile][spalte] = 3;
+            int spalte2 = scanner.nextInt();
+            System.out.println("Gewaehlte Position:" + array[zeile2][spalte2]);
+            if (array[zeile2][spalte2] == 1) {
+                array[zeile2][spalte2] = 3;
                 anzahlSteineSpieler1 += 1;
-            } else if ((array[zeile][spalte] == 0) || (array[zeile][spalte] == 2)) {
+            } else if ((array[zeile2][spalte2] == 0) || (array[zeile2][spalte2] == 2)) {
                 System.out.println("Bitte ein freies Feld waehlen.");
-                int zeile = scanner.nextInt();
+                int zeile2New = scanner.nextInt();
                 System.out.println("Spalte:");
-                int spalte = scanner.nextInt();
+                int spalte2New = scanner.nextInt();
+                System.out.println("Neue gewaehlte Position:" + array[zeile2New][spalte2New]);
                 anzahlSteineSpieler2 += 1;
             }
-            while ((anzahlSteineSpieler1 != 9) && (anzahlSteineSpieler2 != 9)) ;
-        }
+            scanner.close();
+        } while ((anzahlSteineSpieler1 != 9) && (anzahlSteineSpieler2 != 9));
     }
 }
 
