@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SetzphaseMuehle {
+public class Setzphase {
     public static void main(String[] args) {
 
         int anzahlSteineSpieler1 = 0;
