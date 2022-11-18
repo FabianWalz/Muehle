@@ -1,4 +1,4 @@
-public class Muehle{
+public class Muehle {
     public static void main(String[] args) {
 
         if (array[0][0] == 2 && array[0][3] == 2 && array[0][6] == 2) {
