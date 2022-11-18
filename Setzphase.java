@@ -3,10 +3,15 @@ import java.util.Scanner;
 public class Setzphase {
     public static void main(String[] args) {
 
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Name Spieler 1:");
+        String spieler1 = scan.next();
+        System.out.println("Name Spieler 1:");
+        String spieler2 = scan.next();
+
         int anzahlSteineSpieler1 = 0;
         int anzahlSteineSpieler2 = 0;
-        String spieler1 = "Thomas";
-        String spieler2 = "Denis";
+
         int array[][] = new int[7][7];
 
         do {
