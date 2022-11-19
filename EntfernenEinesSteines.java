@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class EntfernenEinesSteines {
 
+    int[][] array = new int[7][7];  // nur damit funktioniert
     public void wegnehmenStein(){
 
         System.out.println("Du hast eine Muehle. Welchen Stein des Gegners möchtest du wegnehmen?");

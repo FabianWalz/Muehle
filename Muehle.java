@@ -1,6 +1,15 @@
+import java.util.Scanner;
+
 public class Muehle {   //Anweisungsblock muss noch geändert werden...
 
+    int[][] array = new int[7][7];  // nur damit funktioniert
+
+    public void wegnehmenStein() {
+        // EntfernenEinesSteines
+    }
+
     public void abfrageMuehleSpieler1() {
+
 
         if (array[0][0] == 2 && array[0][3] == 2 && array[0][6] == 2) {
             wegnehmenStein();
