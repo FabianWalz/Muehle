@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BenachbarteZüge {
+public class ZugphaseSpieler1 { // nach jedem Zug noch Abfrage nach Mühle einbauen...
     public void possibleMoves() {   //Spieler 1...
 
         int[][] array = new int[7][7];  //nur damit es funktioniert
