@@ -29,6 +29,7 @@ public class Probe1 {
     }
 
     public void setzphaseSpieler2() {
+
         do {
             System.out.println(spieler2 + ", du bist an der Reihe.");
             System.out.println("Setze deinen " + anzahlSteineSpieler2 + ". Stein.");
