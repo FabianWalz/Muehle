@@ -1,4 +1,4 @@
-public class Muehle {
+public class Muehle {   //Anweisungsblock muss noch geändert werden...
 
     public void abfrageMuehleSpieler1() {
 
