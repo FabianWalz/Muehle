@@ -1,4 +1,5 @@
 public class Muehle {
+
     public void abfrageMuehleSpieler1() {
 
         if (array[0][0] == 2 && array[0][3] == 2 && array[0][6] == 2) {
