@@ -4,7 +4,6 @@ public class Spielfeld {
         int[][] array = new int[7][7];
 
         array[0][0] = 1;
-
         array[0][3] = 1;
         array[0][6] = 1;
 

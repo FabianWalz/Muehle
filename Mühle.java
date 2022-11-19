@@ -1,6 +1,4 @@
-import java.util.Scanner;
-
-public class Muehle {   //Anweisungsblock muss noch geändert werden...
+public class Mühle {   //Anweisungsblock muss noch geändert werden...
 
     int[][] array = new int[7][7];  // nur damit funktioniert
 
