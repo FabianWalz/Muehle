@@ -4,7 +4,7 @@ public class EntfernenEinesSteines {
 
     public void wegnehmenStein(){
 
-        System.out.println("Du hast eine Muehle. Welchen Stein möchtest du wegnehmen?");
+        System.out.println("Du hast eine Muehle. Welchen Stein des Gegners möchtest du wegnehmen?");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Zeile: ");
         int zeile = scanner.nextInt();
