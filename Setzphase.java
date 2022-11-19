@@ -15,7 +15,7 @@ public class Probe1 {
             System.out.println("Gewaehlte Position: [" + zeile1 + "][" + spalte1 + "]");
             if (array[zeile1][spalte1] == 1) {
                 array[zeile1][spalte1] = 2;
-                anzahlSteineSpieler2 += 1;
+                anzahlSteineSpieler1 += 1;
             } else if ((array[zeile1][spalte1] == 0) || (array[zeile1][spalte1] == 2) || (array[zeile1][spalte1] == 3)) {
                 System.out.println("Bitte ein freies Feld waehlen.");
                 System.out.println("Zeile:");
@@ -40,8 +40,8 @@ public class Probe1 {
             System.out.println("Spalte:");
             int spalte2 = scanner.nextInt();
             System.out.println("Gewaehlte Position: [" + zeile2 + "][" + spalte2 + "]");
-            if (array[zeile1][spalte1] == 1) {
-                array[zeile1][spalte1] = 3;
+            if (array[zeile2][spalte2] == 1) {
+                array[zeile2][spalte2] = 3;
                 anzahlSteineSpieler2 += 1;
             } else if ((array[zeile2][spalte2] == 0) || (array[zeile2][spalte2] == 2) || (array[zeile2][spalte2] == 3)) {
                 System.out.println("Bitte ein freies Feld waehlen.");
