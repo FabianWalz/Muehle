@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Probe1 {
+
     public void setzphaseSpieler1() {
 
         do {
