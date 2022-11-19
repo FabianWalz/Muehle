@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Probe1 {
+public class Setzphase {
 
     public void setzphaseSpieler1() {
 
@@ -26,7 +26,7 @@ public class Probe1 {
                 anzahlSteineSpieler1 += 1;
             }
         } while(anzahlSteineSpieler1 != 9);
-            setzphaseSpieler2();
+        setzphaseSpieler2();
     }
 
     public void setzphaseSpieler2() {
@@ -53,6 +53,7 @@ public class Probe1 {
                 anzahlSteineSpieler2 += 1;
             }
         } while(anzahlSteineSpieler2 != 9);
-            setzphaseSpieler1();
+        setzphaseSpieler1();
     }
 }
+
