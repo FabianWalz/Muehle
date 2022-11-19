@@ -22,7 +22,7 @@ public class Probe1 {
                 int zeile1New = scanner.nextInt();
                 System.out.println("Spalte:");
                 int spalte1New = scanner.nextInt();
-                System.out.println("Neue gewaehlte Position: [" + zeile1 + "][" + spalte1 + "]");
+                System.out.println("Neue gewaehlte Position: [" + zeile1New + "][" + spalte1New + "]");
                 anzahlSteineSpieler1 += 1;
             }
         } while(anzahlSteineSpieler1 != 9);
@@ -49,7 +49,7 @@ public class Probe1 {
                 int zeile2New = scanner.nextInt();
                 System.out.println("Spalte:");
                 int spalte2New = scanner.nextInt();
-                System.out.println("Neue gewaehlte Position: [" + zeile2 + "][" + spalte2 + "]");
+                System.out.println("Neue gewaehlte Position: [" + zeile2New + "][" + spalte2New + "]");
                 anzahlSteineSpieler2 += 1;
             }
         } while(anzahlSteineSpieler2 != 9);
