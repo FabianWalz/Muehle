@@ -8,9 +8,9 @@ public class Mühle {   //Anweisungsblock muss noch geändert werden...
 
     public void abfrageMuehleSpieler1() {
 
-
         if (array[0][0] == 2 && array[0][3] == 2 && array[0][6] == 2) {
             wegnehmenStein();
+            // Methode remove einfügen + Spielerwechsel, damit nicht zwei Steine entfernt werden können bei doppelter Mühle
         } else if (array[0][0] == 2 && array[3][0] == 2 && array[6][0] == 2) {
             wegnehmenStein();
         } else if (array[0][6] == 2 && array[3][6] == 2 && array[6][6] == 2) {
