@@ -1,6 +1,32 @@
+import java.util.Scanner;
+
 public class Muehle {   //Anweisungsblock muss noch geändert werden...
 
+    int[][] array = new int[7][7];  // nur damit funktioniert
+
+    public void wegnehmenStein() {   // nur damit funktioniert
+        System.out.println("Du hast eine Muehle. Welchen Stein des Gegners möchtest du wegnehmen?");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Zeile: ");
+        int zeile = scanner.nextInt();
+        System.out.println("Spalte: ");
+        int spalte = scanner.nextInt();
+        if (array[zeile][spalte] == 3) {
+            array[zeile][spalte] = 1;
+            System.out.println("Deine Eingabe war erfolgreich. Der Stein an der Stelle [" + zeile + "][" + spalte + "] wurde entfernt");
+        } else if (array[zeile][spalte] != 3) {
+            System.out.println("Der ausgewaehlte Stein ist ungültig. Welchen Stein moechtest du stattdessen entfernen?");
+            System.out.println("Zeile: ");
+            int zeileNew = scanner.nextInt();
+            System.out.println("Spalte: ");
+            int spalteNew = scanner.nextInt();
+            array[zeileNew][spalteNew] = 1;
+            System.out.println("Deine Eingabe war erfolgreich. Der Stein an der Stelle [" + zeileNew + "][" + spalteNew + "] wurde entfernt.");
+        }
+    }
+
     public void abfrageMuehleSpieler1() {
+
 
         if (array[0][0] == 2 && array[0][3] == 2 && array[0][6] == 2) {
             wegnehmenStein();

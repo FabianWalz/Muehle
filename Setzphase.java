@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Setzphase {
 
+    String spieler1 = "Peter"; // nur damit funktioniert
+    String spieler2 = "Olaf";   // nur damit funktioniert
+    int anzahlSteineSpieler1 = 0;   // nur damit funktioniert
+    int anzahlSteineSpieler2 = 0;   // nur damit funktioniert
+    int[][] array = new int[7][7];  // nur damit funktioniert
+
     public void setzphaseSpieler1() {
 
         do {
