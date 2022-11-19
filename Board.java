@@ -14,7 +14,7 @@ public class Board {
     public Board(){
         boardPositions = new Position[Board.POSITIONS_ON_BOARD];
         numOfPiecesP1 = 0;
-        numOfPiecesP2 = 2;
+        numOfPiecesP2 = 0;
         totalNumOfPiecesOnBoard = 0;
         initializeBoard();
         initializeMillCombinations();
