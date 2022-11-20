@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main extends SpielerAnlegen {
     public static void main(String[] args) {
 
@@ -6,7 +8,8 @@ public class Main extends SpielerAnlegen {
         SpielerAnlegen nameSpieler2 = new SpielerAnlegen();
         nameSpieler2.anlegenSpieler2();
 
-        System.out.println(nameSpieler2.anzahlSteineSpieler2);
+        nameSpieler1.setzphaseSpieler1();
+        nameSpieler2.setzphaseSpieler2();
 
 
     }
