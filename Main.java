@@ -8,8 +8,15 @@ public class Main extends SpielerAnlegen {
         SpielerAnlegen nameSpieler2 = new SpielerAnlegen();
         nameSpieler2.anlegenSpieler2();
 
+        System.out.println("Setzphase beginnt");
+
         nameSpieler1.setzphaseSpieler1();
         nameSpieler2.setzphaseSpieler2();
+
+        System.out.println("Zugphase beginnt");
+
+
+
 
 
     }
