@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PositionMoeglich{
+public class PositionMoeglich{ //WIRD DAS ÜBERHAUPT NOCH GEBRAUCHT? WEIL IST JA IN SETZPHASE UND SPIELFELD DRIN
     public static void main(String[] args){
 
         int[][] array = new int[7][7];
