@@ -77,7 +77,6 @@ public class Spielfeld {
         return (ergebnis);
     }
 
-
     //Stein entfernen
     public boolean removeStone(Belegung farbe, int zeile, int spalte) {
         boolean ergebnis = false;

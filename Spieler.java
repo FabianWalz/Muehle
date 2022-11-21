@@ -20,6 +20,6 @@ public class Spieler {
     }
 
     public boolean isInJumpPhase() {
-        return nbrStones<=3;
+        return nbrStones<4;
     }
 }
