@@ -9,14 +9,15 @@ public class Spiel {
     private Spieler spieler2;
 
     public Spiel() {
-        curPhase = Phase.SETZEN;
+        //curPhase = Phase.SETZEN;
         matrix = new Spielfeld();
         //
     }
 
     public void run() {
-        setzphaseEcht();
-        //setzphaseFake();
+        //setzphaseEcht();
+        setzphaseFake();
+        System.out.println("----------");
         this.matrix.display();
         System.out.println("----------");
         spielphase();
@@ -29,10 +30,10 @@ public class Spiel {
         this.spieler2 = new Spieler("Schwarz", 9);
         //
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 0);
-        this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 1, 5);
+        this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 0, 3);
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 6);
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 1, 1);
-        this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 3);
+        this.matrix.putStone(Spielfeld.Belegung.WEISS, 1, 5);
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 2, 2);
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 2, 3);
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 2, 4);
@@ -48,7 +49,7 @@ public class Spiel {
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 6, 6);
     }
 
-    // selbstständige
+    //selbstständige Setzphase
     private void setzphaseEcht() {
         int spalte;
         int zeile;
@@ -67,8 +68,8 @@ public class Spiel {
         // abwechselnde Eingabe der Belegungen
         for (int i=0 ; i<9 ; i++) {
             // Spieler 1
-            do {
-                System.out.println("Zug Nr." + zug + ",setzen Spieler  " + this.spieler1.getName() + ":");
+           do {
+                System.out.println("Zug Nr." + zug + ", bitte einen Stein setzen Spieler " + this.spieler1.getName() + ":");
                 System.out.print("    Zeile:  ");
                 zeile = scanner.nextInt();
                 System.out.print("    Spalte: ");
@@ -76,7 +77,7 @@ public class Spiel {
             } while (!this.matrix.putStone(Spielfeld.Belegung.WEISS, zeile, spalte));
             if (this.matrix.isMillComplete(Spielfeld.Belegung.WEISS, zeile,spalte)) {
                 do {
-                    System.out.println("Zug Nr." + zug + ", Stein wegnehmen von Spieler  " + this.spieler2.getName() + ":");
+                    System.out.println("Zug Nr." + zug + ", Stein wegnehmen von Spieler " + this.spieler2.getName() + ":");
                     System.out.print("    Zeile:  ");
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
@@ -85,7 +86,7 @@ public class Spiel {
             }
             // Spieler 2
             do {
-                System.out.println("Zug Nr." + zug + ",setzen Spieler  " + this.spieler2.getName() + ":");
+                System.out.println("Zug Nr." + zug + ", bitte einen Stein setzen Spieler " + this.spieler2.getName() + ":");
                 System.out.print("    Zeile:  ");
                 zeile = scanner.nextInt();
                 System.out.print("    Spalte: ");
@@ -93,7 +94,7 @@ public class Spiel {
             } while (!this.matrix.putStone(Spielfeld.Belegung.SCHWZ, zeile, spalte));
             if (this.matrix.isMillComplete(Spielfeld.Belegung.SCHWZ,zeile,spalte)) {
                 do {
-                    System.out.println("Zug Nr." + zug + ", Stein wegnehmen von Spieler  " + this.spieler1.getName() + ":");
+                    System.out.println("Zug Nr." + zug + ", Stein wegnehmen von Spieler " + this.spieler1.getName() + ":");
                     System.out.print("    Zeile:  ");
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
@@ -101,6 +102,7 @@ public class Spiel {
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.WEISS, zeile, spalte));
             }
             zug++;
+            this.matrix.display();
         }
     }
 
@@ -121,43 +123,43 @@ public class Spiel {
            // Abfrage, ob ein Spieler in der Sprungphase ist
             if (curPlayer.isInJumpPhase()) {
                 do {
-                    System.out.println("Sprung Spieler " + curPlayer.getName() + ":");
-                    System.out.print("von Zeile:   ");
+                    System.out.println("Sprung von Spieler " + curPlayer.getName() + ":");
+                    System.out.print("  von Zeile:   ");
                     vonZeile = scanner.nextInt();
-                    System.out.print("von Spalte:  ");
+                    System.out.print("  von Spalte:  ");
                     vonSpalte = scanner.nextInt();
-                    System.out.print("nach Zeile:  ");
+                    System.out.print("  nach Zeile:  ");
                     nachZeile = scanner.nextInt();
-                    System.out.print("nach Spalte: ");
+                    System.out.print("  nach Spalte: ");
                     nachSpalte = scanner.nextInt();
                 } while (!this.matrix.putStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
                         System.out.println("Stein wegnehmen von Spieler  " + otherColour + ":");
-                        System.out.print("Zeile:  ");
+                        System.out.print("  Zeile:  ");
                         zeile = scanner.nextInt();
-                        System.out.print("Spalte: ");
+                        System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             } else if (matrix.isMovePossible(curColour)) {
                 do {
-                    System.out.println("Zug Spieler " + curPlayer.getName() + ":");
-                    System.out.print("von Zeile:   ");
+                    System.out.println("Zug von Spieler " + curPlayer.getName() + ":");
+                    System.out.print("  von Zeile:   ");
                     vonZeile = scanner.nextInt();
-                    System.out.print("von Spalte:  ");
+                    System.out.print("  von Spalte:  ");
                     vonSpalte = scanner.nextInt();
-                    System.out.print("nach Zeile:  ");
+                    System.out.print("  nach Zeile:  ");
                     nachZeile = scanner.nextInt();
-                    System.out.print("nach Spalte: ");
+                    System.out.print("  nach Spalte: ");
                     nachSpalte = scanner.nextInt();
                 } while (!this.matrix.moveStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
                         System.out.println("Stein wegnehmen von Spieler  " + otherColour + ":");
-                        System.out.print("Zeile:  ");
+                        System.out.print("  Zeile:  ");
                         zeile = scanner.nextInt();
-                        System.out.print("Spalte: ");
+                        System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
@@ -170,11 +172,13 @@ public class Spiel {
                 curPlayer = this.spieler2;
                 curColour = Spielfeld.Belegung.SCHWZ;
                 otherColour = Spielfeld.Belegung.WEISS;
+                this.matrix.display();
             } else {
                 System.out.println("Toggle SCHWARZ  -->  WEISS");
                 curPlayer = this.spieler1;
                 curColour = Spielfeld.Belegung.WEISS;
                 otherColour = Spielfeld.Belegung.SCHWZ;
+                this.matrix.display();
             }
         } while (!gameOver);
         System.out.println("Anzahl gespielte Züge:" + this.matrix.getMoveCounter());

@@ -36,7 +36,7 @@ public class Spielfeld {
         this.spielfeld[6][0] = Belegung.UNBES;
         this.spielfeld[6][3] = Belegung.UNBES;
         this.spielfeld[6][6] = Belegung.UNBES;
-        //display();
+        display();
     }
 
     // Ausgabe 2D-Array UNBES/UNGÜL
@@ -45,7 +45,7 @@ public class Spielfeld {
             for (int spalte = 0; spalte < anzSpalten; spalte++) {
                 System.out.print(this.spielfeld[zeile][spalte] + " ");
             }
-            System.out.println();
+            System.out.println("");
         }
     }
 
@@ -310,7 +310,7 @@ public class Spielfeld {
             ) ergebnis = true;
         }
         else {
-            System.out.println("isMillComplete:  Illegale Koordinaten");
+            System.out.println("Es liegt keine Mühle vor.");
         }
         return ergebnis;
     }

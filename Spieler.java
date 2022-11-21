@@ -15,7 +15,6 @@ public class Spieler {
     public int getNumberOfStones() {
         return nbrStones;
     }
-
     public void removeStone() {
         nbrStones--;
     }
