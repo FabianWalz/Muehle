@@ -84,6 +84,7 @@ public class Spiel {
                     spalte = scanner.nextInt();
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.SCHWZ, zeile, spalte));
             }
+            this.matrix.display();
             // Spieler 2
             do {
                 System.out.println("Zug Nr." + zug + ", bitte einen Stein setzen Spieler " + this.spieler2.getName() + ":");

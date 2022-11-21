@@ -278,6 +278,21 @@ public class Spielfeld {
                     && ((spielfeld[0][6] == farbe && spielfeld[6][6] == farbe)
                     || (spielfeld[3][5] == farbe && spielfeld[3][4] == farbe))
             ) ergebnis = true;
+        } else if (zeile == 4 && spalte == 2) {
+            if (spielfeld[4][2] == farbe
+                    && ((spielfeld[3][2] == farbe && spielfeld[2][2] == farbe)
+                    || (spielfeld[4][3] == farbe && spielfeld[4][4] == farbe))
+            )ergebnis = true;
+        }else if (zeile == 4 && spalte == 3) {
+            if (spielfeld[4][3] == farbe
+                    && ((spielfeld[4][2] == farbe && spielfeld[5][4] == farbe)
+                    || (spielfeld[5][3] == farbe && spielfeld[6][3] == farbe))
+            ) ergebnis = true;
+        } else if (zeile == 4 && spalte == 4) {
+            if (spielfeld[4][4] == farbe
+                    && ((spielfeld[4][2] == farbe && spielfeld[4][3] == farbe)
+                    || (spielfeld[3][4] == farbe && spielfeld[2][4] == farbe))
+            ) ergebnis = true;
         } else if (zeile == 5 && spalte == 1) {
             if (spielfeld[5][1] == farbe
                     && ((spielfeld[5][3] == farbe && spielfeld[5][5] == farbe)
