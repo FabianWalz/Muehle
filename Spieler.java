@@ -1,7 +1,7 @@
 public class Spieler {
 
     private String name = new String();
-    private int nbrStones = 0;{}
+    private int nbrStones = 0;
 
     public Spieler(String name, int stones) {
         this.name = name;

@@ -2,13 +2,9 @@ public class Spielfeld {
 
     private final static int anzZeilen = 7;
     private final static int anzSpalten = 7;
-
     private int moveCounter = 0;
-
     public enum Belegung {UNGÜL, UNBES, WEISS, SCHWZ}
-
     public Belegung[][] spielfeld = new Belegung[anzZeilen][anzSpalten];
-
     public Spielfeld() {
         for (int zeile = 0; zeile < anzZeilen; zeile++) {
             for (int spalte = 0; spalte < anzSpalten; spalte++) {
@@ -43,6 +39,7 @@ public class Spielfeld {
         //display();
     }
 
+    // Ausgabe 2D-Array UNBES/UNGÜL
     public void display() {
         for (int zeile = 0; zeile < anzZeilen; zeile++) {
             for (int spalte = 0; spalte < anzSpalten; spalte++) {
@@ -52,7 +49,7 @@ public class Spielfeld {
         }
     }
 
-    // putStone während Setzphase
+    // putStone während der Setzphase
     public boolean putStone(Belegung farbe, int zeile, int spalte) {
         boolean ergebnis = false;
         if (this.spielfeld[zeile][spalte] == Belegung.UNBES) {
@@ -65,7 +62,7 @@ public class Spielfeld {
         return (ergebnis);
     }
 
-    // putStone, falls in Sprungphase
+    // putStone in der Sprungphase
     public boolean putStone(Belegung farbe, int vonZeile, int vonSpalte, int nachZeile, int nachSpalte) {
         boolean ergebnis = false;
         if (   this.spielfeld[vonZeile][vonSpalte] == farbe
@@ -81,6 +78,7 @@ public class Spielfeld {
     }
 
 
+    //Stein entfernen
     public boolean removeStone(Belegung farbe, int zeile, int spalte) {
         boolean ergebnis = false;
         if (this.spielfeld[zeile][spalte] == farbe) {
@@ -90,6 +88,7 @@ public class Spielfeld {
         return ergebnis;
     }
 
+    // Zugphase; Steine auf benachbarte Felder ziehen
     public boolean moveStone(Belegung farbe, int vonZeile, int vonSpalte, int nachZeile, int nachSpalte) {
         boolean ergebnis = false;
         if (    (this.spielfeld[vonZeile][vonSpalte]   == farbe)
@@ -102,6 +101,7 @@ public class Spielfeld {
         return ergebnis;
     }
 
+    // Zugphase; Abfrage, ob benachbartes Feld ein Nachbar ist
     public boolean isNeighbour(int vonZeile, int vonSpalte, int nachZeile, int nachSpalte){
        boolean ergebnis = false;
 
@@ -192,19 +192,15 @@ public class Spielfeld {
            ergebnis = ergebnis || (nachZeile == 6 && nachSpalte == 3)
                    || (nachZeile == 3 && nachSpalte == 6);
        }
-
-
-
-
         return ergebnis;
     }
 
-
-
+    // Anzahl Züge
     public int getMoveCounter() {
         return this.moveCounter;
     }
 
+    // Abfrage, ob Mühle vorliegt
     public boolean isMillComplete(Belegung farbe, int zeile, int spalte) {
         boolean ergebnis = false;
         if (zeile == 0 && spalte == 0) {
@@ -320,6 +316,7 @@ public class Spielfeld {
     }
 
 
+    // Zugphase; Abfrage, ob ein Zug möglich ist
     public boolean isMovePossible(Belegung farbe) {
         boolean ergebnis = false;
         for (int zeile = 0; zeile < anzZeilen; zeile++) {
@@ -332,6 +329,7 @@ public class Spielfeld {
         return ergebnis;
     }
 
+    // Zugphase; Abfrage, ob ein Nachbar frei ist
     public boolean hasEmptyNeighbour(int zeile, int spalte) {
         boolean ergebnis = false;
 
