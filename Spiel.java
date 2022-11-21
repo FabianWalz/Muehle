@@ -11,12 +11,12 @@ public class Spiel {
     public Spiel() {
         //curPhase = Phase.SETZEN;
         matrix = new Spielfeld();
-        //
+
     }
 
     public void run() {
-        //setzphaseEcht();
-        setzphaseFake();
+        setzphaseEcht();
+        //setzphaseFake();
         System.out.println("----------");
         this.matrix.display();
         System.out.println("----------");
@@ -28,7 +28,7 @@ public class Spiel {
     private void setzphaseFake() {
         this.spieler1 = new Spieler("Weiß", 9);
         this.spieler2 = new Spieler("Schwarz", 9);
-        //
+
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 0);
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 0, 3);
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 6);
@@ -82,6 +82,8 @@ public class Spiel {
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
                     spalte = scanner.nextInt();
+                    this.spieler2.removeStone();
+                    System.out.println("Es wurde ein Stein von " + this.spieler2.getName() + " entfernt");
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.SCHWZ, zeile, spalte));
             }
             this.matrix.display();
@@ -100,6 +102,8 @@ public class Spiel {
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
                     spalte = scanner.nextInt();
+                    this.spieler1.removeStone();
+                    System.out.println("Es wurde ein Stein von " + this.spieler1.getName() + " entfernt");
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.WEISS, zeile, spalte));
             }
             zug++;
@@ -117,6 +121,7 @@ public class Spiel {
         Scanner scanner = new Scanner(System.in);
 
         Spieler curPlayer = spieler1;
+
         Spielfeld.Belegung curColour = Spielfeld.Belegung.WEISS;
         Spielfeld.Belegung otherColour = Spielfeld.Belegung.SCHWZ;
 
