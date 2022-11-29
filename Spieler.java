@@ -35,6 +35,6 @@ public class Spieler {
     }
 
     public boolean isInJumpPhase() {
-        return nbrStones < 4;
+        return true; // vorher return nbrStones < 4;
     }
 }

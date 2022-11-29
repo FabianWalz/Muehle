@@ -119,6 +119,7 @@ public class Spiel {
         boolean gameOver = false;
         int zeile, vonZeile, nachZeile;
         int spalte, vonSpalte, nachSpalte;
+        int nbrOfMovesWithoutMill = 0;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -129,7 +130,7 @@ public class Spiel {
 
         do {
            // Abfrage, ob ein Spieler in der Sprungphase ist
-            if (curPlayer.isInJumpPhase()) {
+            if (curPlayer.isInJumpPhase() && curPlayer.getNumberOfStones() == 3) {
                 do {
                     System.out.println("Sprung von Spieler " + curPlayer.getName() + ":");
                     System.out.print("  von Zeile:   ");
@@ -142,6 +143,7 @@ public class Spiel {
                     nachSpalte = scanner.nextInt();
                     curPlayer.nbrMoves();
                     System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
+                    nbrOfMovesWithoutMill++;
                 } while (!this.matrix.putStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -151,6 +153,7 @@ public class Spiel {
                         System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
                         otherPlayer.removeStone();
+                        nbrOfMovesWithoutMill = 0;
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             } else if (matrix.isMovePossible(curColour)) {
@@ -166,6 +169,7 @@ public class Spiel {
                     nachSpalte = scanner.nextInt();
                     curPlayer.nbrMoves();
                     System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
+                    nbrOfMovesWithoutMill++;
                 } while (!this.matrix.moveStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -175,10 +179,18 @@ public class Spiel {
                         System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
                         otherPlayer.removeStone();
+                        nbrOfMovesWithoutMill = 0;
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             }
-            else { gameOver = true; }
+            else if (nbrOfMovesWithoutMill == 20){
+                gameOver = true;
+                System.out.println("Das Spiel ist beendet. Ergebnis: Unentschieden");
+            }
+            else {
+                gameOver = true;
+                System.out.println("Das Spiel ist beendet. " + otherPlayer.getName() + " hat das Spiel gewonnen.");
+            }
             // Spielerwechsel
             if (curColour == Spielfeld.Belegung.WEISS) {
                 System.out.println("Toggle WEISS  -->  SCHWARZ");
@@ -197,6 +209,5 @@ public class Spiel {
                 this.matrix.display();
             }
         } while (!gameOver);
-        System.out.println("Das Spiel ist beendet.");
     }
 }
