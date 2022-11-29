@@ -2,7 +2,8 @@ public class Spielfeld {
 
     private final static int anzZeilen = 7;
     private final static int anzSpalten = 7;
-    private int moveCounter = 0;
+
+    //private int moveCounter = 0;
     public enum Belegung {UNGÜL, UNBES, WEISS, SCHWZ}
     public Belegung[][] spielfeld = new Belegung[anzZeilen][anzSpalten];
     public Spielfeld() {
@@ -41,21 +42,21 @@ public class Spielfeld {
 
     // Ausgabe 2D-Array UNBES/UNGÜL
     public void display() {
-        for (int zeile = 0; zeile < anzZeilen; zeile++) {
-            for (int spalte = 0; spalte < anzSpalten; spalte++) {
-                System.out.print(this.spielfeld[zeile][spalte] + " ");
+            for (int zeile = 0; zeile < anzZeilen; zeile++) {
+                for (int spalte = 0; spalte < anzSpalten; spalte++) {
+                    System.out.print(this.spielfeld[zeile][spalte] + " ");
+                }
+                System.out.println("");
             }
-            System.out.println("");
         }
-    }
 
     // putStone während der Setzphase
     public boolean putStone(Belegung farbe, int zeile, int spalte) {
         boolean ergebnis = false;
         if (this.spielfeld[zeile][spalte] == Belegung.UNBES) {
             this.spielfeld[zeile][spalte] = farbe;
-            this.moveCounter++;
             ergebnis = true;
+            //moveCounter++;
         } else {
             ergebnis = false;
         }
@@ -69,7 +70,7 @@ public class Spielfeld {
             && this.spielfeld[nachZeile][nachSpalte] == Belegung.UNBES) {
             this.spielfeld[vonZeile][vonSpalte] = Belegung.UNBES;
             this.spielfeld[nachZeile][nachSpalte] = farbe;
-            this.moveCounter++;
+            //moveCounter++;
             ergebnis = true;
         } else {
             ergebnis = false;
@@ -195,9 +196,9 @@ public class Spielfeld {
     }
 
     // Anzahl Züge
-    public int getMoveCounter() {
-        return this.moveCounter;
-    }
+    //public int getMoveCounter() {
+    //    return this.moveCounter;
+    //}
 
     // Abfrage, ob Mühle vorliegt
     public boolean isMillComplete(Belegung farbe, int zeile, int spalte) {

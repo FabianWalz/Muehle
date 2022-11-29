@@ -26,8 +26,8 @@ public class Spiel {
 
     // fertige Setzphase zum Testen
     private void setzphaseFake() {
-        this.spieler1 = new Spieler("Weiß", 9);
-        this.spieler2 = new Spieler("Schwarz", 9);
+        this.spieler1 = new Spieler("Weiß", 9, 0);
+        this.spieler2 = new Spieler("Schwarz", 9, 0);
         //
         this.matrix.putStone(Spielfeld.Belegung.WEISS, 0, 0);
         this.matrix.putStone(Spielfeld.Belegung.SCHWZ, 0, 3);
@@ -59,14 +59,14 @@ public class Spiel {
 
         System.out.print("Name Spieler 1: ");
         input = scanner.nextLine();
-        this.spieler1 = new Spieler(input, 9);
+        this.spieler1 = new Spieler(input, 0, 0 );
         //
         System.out.print("Name Spieler 2: ");
         input = scanner.nextLine();
-        this.spieler2 = new Spieler(input, 9);
+        this.spieler2 = new Spieler(input, 0, 0);
 
         // abwechselnde Eingabe der Belegungen
-        for (int i=0 ; i<9 ; i++) {
+        for (int i = 0 ; i<9 ; i++) {
             // Spieler 1
            do {
                 System.out.println("Zug Nr." + zug + ", bitte einen Stein setzen Spieler " + this.spieler1.getName() + ":");
@@ -74,6 +74,7 @@ public class Spiel {
                 zeile = scanner.nextInt();
                 System.out.print("    Spalte: ");
                 spalte = scanner.nextInt();
+                spieler1.addStone();
             } while (!this.matrix.putStone(Spielfeld.Belegung.WEISS, zeile, spalte));
             if (this.matrix.isMillComplete(Spielfeld.Belegung.WEISS, zeile,spalte)) {
                 do {
@@ -82,6 +83,7 @@ public class Spiel {
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
                     spalte = scanner.nextInt();
+                    spieler2.removeStone();
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.SCHWZ, zeile, spalte));
             }
             this.matrix.display();
@@ -92,6 +94,7 @@ public class Spiel {
                 zeile = scanner.nextInt();
                 System.out.print("    Spalte: ");
                 spalte = scanner.nextInt();
+                spieler2.addStone();
             } while (!this.matrix.putStone(Spielfeld.Belegung.SCHWZ, zeile, spalte));
             if (this.matrix.isMillComplete(Spielfeld.Belegung.SCHWZ,zeile,spalte)) {
                 do {
@@ -100,10 +103,13 @@ public class Spiel {
                     zeile = scanner.nextInt();
                     System.out.print("    Spalte: ");
                     spalte = scanner.nextInt();
+                    spieler1.removeStone();
                 } while (!this.matrix.removeStone(Spielfeld.Belegung.WEISS, zeile, spalte));
             }
             zug++;
             this.matrix.display();
+            spieler1.getNumberOfStones();
+            spieler2.getNumberOfStones();
         }
     }
 
@@ -117,6 +123,7 @@ public class Spiel {
         Scanner scanner = new Scanner(System.in);
 
         Spieler curPlayer = spieler1;
+        Spieler otherPlayer = spieler2;
         Spielfeld.Belegung curColour = Spielfeld.Belegung.WEISS;
         Spielfeld.Belegung otherColour = Spielfeld.Belegung.SCHWZ;
 
@@ -133,6 +140,8 @@ public class Spiel {
                     nachZeile = scanner.nextInt();
                     System.out.print("  nach Spalte: ");
                     nachSpalte = scanner.nextInt();
+                    curPlayer.nbrMoves();
+                    System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
                 } while (!this.matrix.putStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -141,6 +150,7 @@ public class Spiel {
                         zeile = scanner.nextInt();
                         System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
+                        otherPlayer.removeStone();
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             } else if (matrix.isMovePossible(curColour)) {
@@ -154,6 +164,8 @@ public class Spiel {
                     nachZeile = scanner.nextInt();
                     System.out.print("  nach Spalte: ");
                     nachSpalte = scanner.nextInt();
+                    curPlayer.nbrMoves();
+                    System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
                 } while (!this.matrix.moveStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -162,27 +174,29 @@ public class Spiel {
                         zeile = scanner.nextInt();
                         System.out.print("  Spalte: ");
                         spalte = scanner.nextInt();
+                        otherPlayer.removeStone();
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             }
             else { gameOver = true; }
-
             // Spielerwechsel
             if (curColour == Spielfeld.Belegung.WEISS) {
                 System.out.println("Toggle WEISS  -->  SCHWARZ");
                 curPlayer = this.spieler2;
+                otherPlayer = this.spieler1;
                 curColour = Spielfeld.Belegung.SCHWZ;
                 otherColour = Spielfeld.Belegung.WEISS;
                 this.matrix.display();
+
             } else {
                 System.out.println("Toggle SCHWARZ  -->  WEISS");
                 curPlayer = this.spieler1;
+                otherPlayer = this.spieler2;
                 curColour = Spielfeld.Belegung.WEISS;
                 otherColour = Spielfeld.Belegung.SCHWZ;
                 this.matrix.display();
             }
         } while (!gameOver);
-        System.out.println("Anzahl gespielte Züge:" + this.matrix.getMoveCounter());
+        System.out.println("Das Spiel ist beendet.");
     }
-
 }
