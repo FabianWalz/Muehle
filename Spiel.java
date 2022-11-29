@@ -108,8 +108,8 @@ public class Spiel {
             }
             zug++;
             this.matrix.display();
-            spieler1.getNumberOfStones();
-            spieler2.getNumberOfStones();
+            System.out.println(spieler1.getNumberOfStones());
+            System.out.println(spieler2.getNumberOfStones());
         }
     }
 
