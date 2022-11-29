@@ -12,6 +12,7 @@ public class Spielfeld {
                 this.spielfeld[zeile][spalte] = Belegung.UNGÜL;
             }
         }
+
         this.spielfeld[0][0] = Belegung.UNBES;
         this.spielfeld[0][3] = Belegung.UNBES;
         this.spielfeld[0][6] = Belegung.UNBES;
