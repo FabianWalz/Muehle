@@ -144,6 +144,10 @@ public class Spiel {
                     curPlayer.nbrMoves();
                     System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
                     nbrOfMovesWithoutMill++;
+                    if (nbrOfMovesWithoutMill == 20){
+                        gameOver = true;
+                        System.out.println("Das Spiel ist beendet. Ergebnis: Unentschieden");
+                    }
                 } while (!this.matrix.putStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -170,6 +174,10 @@ public class Spiel {
                     curPlayer.nbrMoves();
                     System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
                     nbrOfMovesWithoutMill++;
+                    if (nbrOfMovesWithoutMill == 20){
+                        gameOver = true;
+                        System.out.println("Das Spiel ist beendet. Ergebnis: Unentschieden");
+                    }
                 } while (!this.matrix.moveStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
                     do {
@@ -183,10 +191,6 @@ public class Spiel {
                     } while (!this.matrix.removeStone(otherColour, zeile, spalte));
                 }
             }
-            else if (nbrOfMovesWithoutMill == 20){
-                gameOver = true;
-                System.out.println("Das Spiel ist beendet. Ergebnis: Unentschieden");
-            }
             else {
                 gameOver = true;
                 System.out.println("Das Spiel ist beendet. " + otherPlayer.getName() + " hat das Spiel gewonnen.");
@@ -199,7 +203,6 @@ public class Spiel {
                 curColour = Spielfeld.Belegung.SCHWZ;
                 otherColour = Spielfeld.Belegung.WEISS;
                 this.matrix.display();
-
             } else {
                 System.out.println("Toggle SCHWARZ  -->  WEISS");
                 curPlayer = this.spieler1;
