@@ -1,6 +1,7 @@
 import java.util.Scanner;
-//ackage com.company;
-import java.util.concurrent.TimeUnit;
+
+//!!! while(curPlayer.stillTime == true) !!!
+
 
 public class Spiel {
 
@@ -136,7 +137,7 @@ public class Spiel {
     private void spielphase() throws InterruptedException {
 
         boolean gameOver = false;
-        int zeile, vonZeile, nachZeile;
+        int zeile, vonZeile = 0, nachZeile;
         int spalte, vonSpalte, nachSpalte;
         int nbrOfMovesWithoutMill = 0;
 
@@ -170,11 +171,11 @@ public class Spiel {
                         System.out.println("Das Spiel ist beendet. Ergebnis: Unentschieden");
                     }
 
-                    if (curPlayer.stillTime == false) {
-                        gameOver = true;
-                        System.out.println("---Zeitüberschreitung---");
-                        System.out.println("Glückwunsch " + otherPlayer.getName() + ". Du hast gewonnen");
-                    }
+                    //if (curPlayer.stillTime == false) {
+                    //    gameOver = true;
+                    //    System.out.println("---Zeitüberschreitung---");
+                    //    System.out.println("Glückwunsch " + otherPlayer.getName() + ". Du hast gewonnen");
+                    //}
 
                 } while (!this.matrix.putStone(curColour, vonZeile, vonSpalte, nachZeile, nachSpalte));
                 if (this.matrix.isMillComplete(curColour, nachZeile, nachSpalte)) {
@@ -197,29 +198,18 @@ public class Spiel {
                 }
             } else if (matrix.isMovePossible(curColour)) {
                 do {
-                    while(curPlayer.stillTime == true) {
-
-                        System.out.println("Zug von Spieler " + curPlayer.getName() + ":");
-                        System.out.print("  von Zeile:   ");
-                        //vonZeile = scanner.nextInt();
-                        System.out.print("  von Spalte:  ");
-                        //vonSpalte = scanner.nextInt();
-                        System.out.print("  nach Zeile:  ");
-                        //nachZeile = scanner.nextInt();
-                        System.out.print("  nach Spalte: ");
-                        //nachSpalte = scanner.nextInt();
-                        curPlayer.nbrMoves();
-                        System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
-                        nbrOfMovesWithoutMill++;
-
-                        if (curPlayer.stillTime == false) {
-                            gameOver = true;
-                            System.out.println("--- Zeitüberschreitung von " + curPlayer.getName() + " ---");
-                            System.out.println("Glückwunsch " + otherPlayer.getName() + ". Du hast gewonnen.");
-                        } else{
-                            gameOver = false;
-                        }
-                    }
+                    System.out.println("Zug von Spieler " + curPlayer.getName() + ":");
+                    System.out.print("  von Zeile:   ");
+                    vonZeile = scanner.nextInt();
+                    System.out.print("  von Spalte:  ");
+                    vonSpalte = scanner.nextInt();
+                    System.out.print("  nach Zeile:  ");
+                    nachZeile = scanner.nextInt();
+                    System.out.print("  nach Spalte: ");
+                    nachSpalte = scanner.nextInt();
+                    curPlayer.nbrMoves();
+                    System.out.println("Anzahl gespielter Züge von " + curPlayer.getName() + ": " + curPlayer.getNumberOfMoves());
+                    nbrOfMovesWithoutMill++;
 
                     if (nbrOfMovesWithoutMill == 20) {
                         gameOver = true;
@@ -252,8 +242,8 @@ public class Spiel {
                 }
             }
 
-            if(gameOver == true){
-               break;
+            if (gameOver == true) {
+                break;
             }
 
             if (curColour == Spielfeld.Belegung.WEISS) {

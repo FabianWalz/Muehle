@@ -39,7 +39,7 @@ public class Spieler {
 
     public void stillTime() throws InterruptedException {
         boolean stillTime = true;
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(30);
 
     }
 
