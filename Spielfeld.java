@@ -1,4 +1,4 @@
-public class Spielfeld {
+public class Spielfeld  {
 
     private final static int anzZeilen = 7;
     private final static int anzSpalten = 7;
