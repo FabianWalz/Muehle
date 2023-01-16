@@ -2,6 +2,7 @@ public class Spielfeld {
 
     private final static int anzZeilen = 7;
     private final static int anzSpalten = 7;
+    private boolean aBoolean;
 
     //private int moveCounter = 0;
     public enum Belegung {UNGÜL, UNBES, WEISS, SCHWZ}
@@ -73,7 +74,6 @@ public class Spielfeld {
                 && this.spielfeld[nachZeile][nachSpalte] == Belegung.UNBES) {
             this.spielfeld[vonZeile][vonSpalte] = Belegung.UNBES;
             this.spielfeld[nachZeile][nachSpalte] = farbe;
-            //moveCounter++;
             ergebnis = true;
         } else {
             ergebnis = false;
@@ -91,7 +91,6 @@ public class Spielfeld {
         return ergebnis;
     }
 
-    // Zugphase; Steine auf benachbarte Felder ziehen
     public boolean moveStone(Belegung farbe, int vonZeile, int vonSpalte, int nachZeile, int nachSpalte) {
         boolean ergebnis = false;
         if ((this.spielfeld[vonZeile][vonSpalte] == farbe)
@@ -104,7 +103,7 @@ public class Spielfeld {
         return ergebnis;
     }
 
-    // Zugphase; Abfrage, ob benachbartes Feld ein Nachbar ist
+    // Zugphase; Abfrage, ob ein benachbartes Feld ein Nachbar ist
     public boolean isNeighbour(int vonZeile, int vonSpalte, int nachZeile, int nachSpalte) {
         boolean ergebnis = false;
 
@@ -197,11 +196,6 @@ public class Spielfeld {
         }
         return ergebnis;
     }
-
-    // Anzahl Züge
-    //public int getMoveCounter() {
-    //    return this.moveCounter;
-    //}
 
     // Abfrage, ob Mühle vorliegt
     public boolean isMillComplete(Belegung farbe, int zeile, int spalte) {
@@ -332,7 +326,6 @@ public class Spielfeld {
         return ergebnis;
     }
 
-
     // Zugphase; Abfrage, ob ein Zug möglich ist
     public boolean isMovePossible(Belegung farbe) {
         boolean ergebnis = false;
@@ -442,6 +435,333 @@ public class Spielfeld {
         }
         return (ergebnis);
     }
+
+    //Computer
+    public boolean preventMill() {
+        boolean ergebnis = false;
+
+        if (this.spielfeld[0][0] == Belegung.WEISS && this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[0][6] == Belegung.UNBES) {
+            this.spielfeld[0][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[0][6] == Belegung.WEISS && this.spielfeld[0][0] == Belegung.UNBES) {
+            this.spielfeld[0][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.WEISS && this.spielfeld[0][6] == Belegung.WEISS && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.WEISS && this.spielfeld[3][0] == Belegung.WEISS && this.spielfeld[6][0] == Belegung.UNBES) {
+            this.spielfeld[6][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.WEISS && this.spielfeld[3][0] == Belegung.WEISS && this.spielfeld[0][0] == Belegung.UNBES) {
+            this.spielfeld[0][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.WEISS && this.spielfeld[6][0] == Belegung.WEISS && this.spielfeld[3][0] == Belegung.UNBES) {
+            this.spielfeld[3][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][6] == Belegung.WEISS && this.spielfeld[3][6] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.UNBES) {
+            this.spielfeld[6][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][6] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.WEISS && this.spielfeld[0][6] == Belegung.UNBES) {
+            this.spielfeld[0][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][6] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.WEISS && this.spielfeld[3][6] == Belegung.UNBES) {
+            this.spielfeld[3][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.WEISS && this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[1][5] == Belegung.UNBES) {
+            this.spielfeld[1][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[1][5] == Belegung.WEISS && this.spielfeld[1][1] == Belegung.UNBES) {
+            this.spielfeld[1][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.WEISS && this.spielfeld[3][1] == Belegung.WEISS && this.spielfeld[5][1] == Belegung.UNBES) {
+            this.spielfeld[5][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][1] == Belegung.WEISS && this.spielfeld[5][1] == Belegung.WEISS && this.spielfeld[1][1] == Belegung.UNBES) {
+            this.spielfeld[1][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.WEISS && this.spielfeld[5][1] == Belegung.WEISS && this.spielfeld[3][1] == Belegung.UNBES) {
+            this.spielfeld[3][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][5] == Belegung.WEISS && this.spielfeld[3][5] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.UNBES) {
+            this.spielfeld[5][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][5] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.WEISS && this.spielfeld[1][5] == Belegung.UNBES) {
+            this.spielfeld[1][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][5] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.WEISS && this.spielfeld[3][5] == Belegung.UNBES) {
+            this.spielfeld[3][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[2][4] == Belegung.UNBES) {
+            this.spielfeld[2][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[2][4] == Belegung.WEISS && this.spielfeld[2][2] == Belegung.UNBES) {
+            this.spielfeld[2][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.WEISS && this.spielfeld[2][4] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.WEISS && this.spielfeld[3][2] == Belegung.WEISS && this.spielfeld[4][2] == Belegung.UNBES) {
+            this.spielfeld[4][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][2] == Belegung.WEISS && this.spielfeld[4][2] == Belegung.WEISS && this.spielfeld[2][2] == Belegung.UNBES) {
+            this.spielfeld[2][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.WEISS && this.spielfeld[4][2] == Belegung.WEISS && this.spielfeld[3][2] == Belegung.UNBES) {
+            this.spielfeld[3][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][4] == Belegung.WEISS && this.spielfeld[3][4] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.UNBES) {
+            this.spielfeld[4][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][4] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.WEISS && this.spielfeld[2][4] == Belegung.UNBES) {
+            this.spielfeld[2][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][4] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.WEISS && this.spielfeld[3][4] == Belegung.UNBES) {
+            this.spielfeld[3][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][2] == Belegung.WEISS && this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.UNBES) {
+            this.spielfeld[4][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.WEISS && this.spielfeld[4][2] == Belegung.UNBES) {
+            this.spielfeld[4][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][2] == Belegung.WEISS && this.spielfeld[4][4] == Belegung.WEISS && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][1] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.UNBES) {
+            this.spielfeld[5][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.WEISS && this.spielfeld[5][1] == Belegung.UNBES) {
+            this.spielfeld[5][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][1] == Belegung.WEISS && this.spielfeld[5][5] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.UNBES) {
+            this.spielfeld[6][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.WEISS && this.spielfeld[6][0] == Belegung.UNBES) {
+            this.spielfeld[6][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.WEISS && this.spielfeld[6][6] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[1][3] == Belegung.UNBES) {
+            this.spielfeld[1][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.WEISS && this.spielfeld[2][3] == Belegung.WEISS && this.spielfeld[1][3] == Belegung.UNBES) {
+            this.spielfeld[1][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.WEISS && this.spielfeld[6][3] == Belegung.WEISS && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        }
+        return ergebnis;
+    }
+
+    //Computer
+    public boolean createMill() {
+        boolean ergebnis = false;
+
+        if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[0][6] == Belegung.UNBES) {
+            this.spielfeld[0][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[0][6] == Belegung.SCHWZ && this.spielfeld[0][0] == Belegung.UNBES) {
+            this.spielfeld[0][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[0][6] == Belegung.SCHWZ && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[3][0] == Belegung.SCHWZ && this.spielfeld[6][0] == Belegung.UNBES) {
+            this.spielfeld[6][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.SCHWZ && this.spielfeld[3][0] == Belegung.SCHWZ && this.spielfeld[0][0] == Belegung.UNBES) {
+            this.spielfeld[0][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[6][0] == Belegung.SCHWZ && this.spielfeld[3][0] == Belegung.UNBES) {
+            this.spielfeld[3][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][6] == Belegung.SCHWZ && this.spielfeld[3][6] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.UNBES) {
+            this.spielfeld[6][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][6] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[0][6] == Belegung.UNBES) {
+            this.spielfeld[0][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][6] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[3][6] == Belegung.UNBES) {
+            this.spielfeld[3][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[1][5] == Belegung.UNBES) {
+            this.spielfeld[1][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[1][5] == Belegung.SCHWZ && this.spielfeld[1][1] == Belegung.UNBES) {
+            this.spielfeld[1][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.SCHWZ && this.spielfeld[3][1] == Belegung.SCHWZ && this.spielfeld[5][1] == Belegung.UNBES) {
+            this.spielfeld[5][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][1] == Belegung.SCHWZ && this.spielfeld[5][1] == Belegung.SCHWZ && this.spielfeld[1][1] == Belegung.UNBES) {
+            this.spielfeld[1][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.SCHWZ && this.spielfeld[5][1] == Belegung.SCHWZ && this.spielfeld[3][1] == Belegung.UNBES) {
+            this.spielfeld[3][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][5] == Belegung.SCHWZ && this.spielfeld[3][5] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.UNBES) {
+            this.spielfeld[5][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][5] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[1][5] == Belegung.UNBES) {
+            this.spielfeld[1][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][5] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[3][5] == Belegung.UNBES) {
+            this.spielfeld[3][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[2][4] == Belegung.UNBES) {
+            this.spielfeld[2][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[2][4] == Belegung.SCHWZ && this.spielfeld[2][2] == Belegung.UNBES) {
+            this.spielfeld[2][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[2][4] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[3][2] == Belegung.SCHWZ && this.spielfeld[4][2] == Belegung.UNBES) {
+            this.spielfeld[4][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][2] == Belegung.SCHWZ && this.spielfeld[4][2] == Belegung.SCHWZ && this.spielfeld[2][2] == Belegung.UNBES) {
+            this.spielfeld[2][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[4][2] == Belegung.SCHWZ && this.spielfeld[3][2] == Belegung.UNBES) {
+            this.spielfeld[3][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][4] == Belegung.SCHWZ && this.spielfeld[3][4] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.UNBES) {
+            this.spielfeld[4][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[3][4] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[2][4] == Belegung.UNBES) {
+            this.spielfeld[2][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][4] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[3][4] == Belegung.UNBES) {
+            this.spielfeld[3][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][2] == Belegung.SCHWZ && this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.UNBES) {
+            this.spielfeld[4][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[4][2] == Belegung.UNBES) {
+            this.spielfeld[4][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][2] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][1] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.UNBES) {
+            this.spielfeld[5][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[5][1] == Belegung.UNBES) {
+            this.spielfeld[5][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][1] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.UNBES) {
+            this.spielfeld[6][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[6][0] == Belegung.UNBES) {
+            this.spielfeld[6][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[6][0] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.UNBES) {
+            this.spielfeld[1][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.UNBES) {
+            this.spielfeld[2][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[0][3] == Belegung.UNBES) {
+            this.spielfeld[0][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][3] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.UNBES) {
+            this.spielfeld[1][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.UNBES) {
+            this.spielfeld[6][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[5][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[4][3] == Belegung.UNBES) {
+            this.spielfeld[4][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[4][3] == Belegung.SCHWZ && this.spielfeld[6][3] == Belegung.SCHWZ && this.spielfeld[5][3] == Belegung.UNBES) {
+            this.spielfeld[5][3] = Belegung.SCHWZ;
+            ergebnis = true;
+        }
+        return ergebnis;
+    }
+
+    //Computer
+    public boolean cleverMove() {
+        boolean ergebnis = false;
+
+        if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[3][0] == Belegung.UNBES && this.spielfeld[6][3] == Belegung.UNBES && this.spielfeld[6][0] == Belegung.UNBES) {
+            this.spielfeld[6][0] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[0][0] == Belegung.SCHWZ && this.spielfeld[6][6] == Belegung.SCHWZ && this.spielfeld[0][3] == Belegung.UNBES && this.spielfeld[3][6] == Belegung.UNBES && this.spielfeld[0][6] == Belegung.UNBES) {
+            this.spielfeld[0][6] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[3][1] == Belegung.UNBES && this.spielfeld[5][3] == Belegung.UNBES && this.spielfeld[5][1] == Belegung.UNBES) {
+            this.spielfeld[5][1] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[1][1] == Belegung.SCHWZ && this.spielfeld[5][5] == Belegung.SCHWZ && this.spielfeld[1][3] == Belegung.UNBES && this.spielfeld[3][5] == Belegung.UNBES && this.spielfeld[1][5] == Belegung.UNBES) {
+            this.spielfeld[1][5] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[3][2] == Belegung.UNBES && this.spielfeld[4][3] == Belegung.UNBES && this.spielfeld[4][2] == Belegung.UNBES) {
+            this.spielfeld[4][2] = Belegung.SCHWZ;
+            ergebnis = true;
+        } else if (this.spielfeld[2][2] == Belegung.SCHWZ && this.spielfeld[4][4] == Belegung.SCHWZ && this.spielfeld[2][3] == Belegung.UNBES && this.spielfeld[3][4] == Belegung.UNBES && this.spielfeld[2][4] == Belegung.UNBES) {
+            this.spielfeld[2][4] = Belegung.SCHWZ;
+            ergebnis = true;
+        }
+        return ergebnis;
+    }
 }
+
+
+
 
 

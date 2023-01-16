@@ -1,8 +1,5 @@
-import java.util.concurrent.TimeUnit;
-
 public class Spieler {
 
-    public boolean stillTime;
     private String name = new String();
     private int nbrStones = 0;
     private int nbrMoves = 0;
@@ -24,7 +21,6 @@ public class Spieler {
     public void addStone() {
         nbrStones++;
     }
-
     public int getNumberOfStones() {
         return this.nbrStones;
     }
@@ -37,13 +33,4 @@ public class Spieler {
         return this.nbrMoves;
     }
 
-    public void stillTime() throws InterruptedException {
-        boolean stillTime = true;
-        TimeUnit.SECONDS.sleep(30);
-
-    }
-
-    //public boolean isInJumpPhase() {
-    //    return true; // vorher return nbrStones < 4;
-    //}
 }
